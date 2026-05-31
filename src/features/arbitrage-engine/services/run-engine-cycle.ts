@@ -8,37 +8,18 @@ export async function runEngineCycle() {
 
   for (const opportunity of opportunities) {
     await saveOpportunity(opportunity);
-
-    console.log(
-      JSON.stringify(
-        opportunity,
-        null,
-        2,
-      ),
-    );
   }
 
-  const bestOpportunity =
-    opportunities.find(
-      (opportunity) =>
-        opportunity.decision ===
-        "EXECUTE",
-    );
-
-  if (
-    bestOpportunity &&
-    canTrade()
-  ) {
-    await saveExecutedTrade(
-      bestOpportunity,
-    );
+  const bestOpportunity = opportunities.find(
+    (opportunity) => opportunity.decision === "EXECUTE",
+  );
+  if (bestOpportunity && canTrade()) {
+    await saveExecutedTrade(bestOpportunity);
   }
 
   return {
     detected: opportunities.length,
 
-    executed: bestOpportunity
-      ? 1
-      : 0,
+    executed: bestOpportunity ? 1 : 0,
   };
 }

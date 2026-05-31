@@ -8,8 +8,7 @@ export function detectArbitrage(
   const opportunities = [];
 
   if (exchangeA.ask < exchangeB.bid) {
-    const opportunity =
-      buildOpportunity(exchangeA, exchangeB);
+    const opportunity = buildOpportunity(exchangeA, exchangeB);
 
     if (opportunity) {
       opportunities.push(opportunity);
@@ -17,8 +16,7 @@ export function detectArbitrage(
   }
 
   if (exchangeB.ask < exchangeA.bid) {
-    const opportunity =
-      buildOpportunity(exchangeB, exchangeA);
+    const opportunity = buildOpportunity(exchangeB, exchangeA);
 
     if (opportunity) {
       opportunities.push(opportunity);
@@ -29,7 +27,5 @@ export function detectArbitrage(
     return null;
   }
 
-  return opportunities.sort(
-    (a, b) => b.netProfit - a.netProfit,
-  )[0];
+  return opportunities.sort((a, b) => b.netProfit - a.netProfit)[0];
 }

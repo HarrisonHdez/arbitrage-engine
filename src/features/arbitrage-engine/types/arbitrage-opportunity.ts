@@ -9,6 +9,7 @@ export type ArbitrageOpportunity = {
 
   grossProfit: number;
   fees: number;
+  withdrawalFee: number;
   slippage: number;
 
   netProfit: number;

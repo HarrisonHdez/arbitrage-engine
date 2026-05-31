@@ -11,6 +11,7 @@ export async function saveOpportunity(opportunity: ArbitrageOpportunity) {
     buy_price: opportunity.buyPrice,
     sell_price: opportunity.sellPrice,
     volume: opportunity.volume,
+    withdrawal_fee: opportunity.withdrawalFee,
 
     gross_profit: opportunity.grossProfit,
 

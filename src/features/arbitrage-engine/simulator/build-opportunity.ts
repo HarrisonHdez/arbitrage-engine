@@ -7,6 +7,7 @@ import { ArbitrageOpportunity } from "../types/arbitrage-opportunity";
 import { calculateLiquidityScore } from "../calculations/calculate-liquidity-score";
 import { calculateSlippagePercent } from "../calculations/calculate-slippage-percent";
 import { TRADING_CONFIG } from "@/src/config/trading";
+import { getWithdrawalFee } from "../services/get-withdrawal-fee";
 export function buildOpportunity(
   buyExchange: MarketSnapshot,
   sellExchange: MarketSnapshot,
@@ -32,6 +33,9 @@ export function buildOpportunity(
     sellPrice: sellExchange.bid,
 
     volume,
+
+    withdrawalFeeUsd: getWithdrawalFee(buyExchange.exchange),
+
     buyFeePercent: getExchangeFee(buyExchange.exchange),
 
     sellFeePercent: getExchangeFee(sellExchange.exchange),
@@ -63,6 +67,7 @@ export function buildOpportunity(
 
     grossProfit: result.grossProfit,
     fees: result.fees,
+    withdrawalFee: result.withdrawalFee,
     slippage: result.slippage,
 
     netProfit: result.netProfit,

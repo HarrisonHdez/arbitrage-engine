@@ -13,8 +13,6 @@ export async function saveExecutedTrade(opportunity: ArbitrageOpportunity) {
 
   registerTrade(opportunity.netProfit);
 
-  console.log("EXECUTED VOLUME:", opportunity.volume);
-
   const supabase = await createClient();
 
   const { error } = await supabase.from("executed_trades").insert({
@@ -29,6 +27,7 @@ export async function saveExecutedTrade(opportunity: ArbitrageOpportunity) {
     gross_profit: opportunity.grossProfit,
 
     fees: opportunity.fees,
+    withdrawal_fee: opportunity.withdrawalFee,
     slippage: opportunity.slippage,
 
     net_profit: opportunity.netProfit,
