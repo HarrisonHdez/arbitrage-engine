@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FaShieldAlt } from "react-icons/fa";
 import { FiSettings } from "react-icons/fi";
+
 const navItems = [
   {
     label: "Dashboard",
@@ -32,13 +33,16 @@ export function AppHeader() {
 
   return (
     <header className="border-b border-zinc-800 bg-[#0b0f14]">
-      <div className="mx-auto flex h-14 items-center justify-between px-6">
-        <div className="flex items-center gap-8">
-          <Link href="/" className="text-lg font-semibold text-slate-100">
+      <div className="mx-auto flex flex-wrap items-center justify-between gap-3 px-4 py-3">
+        <div className="flex items-center gap-4">
+          <Link
+            href="/"
+            className="text-base font-semibold text-slate-100 sm:text-lg"
+          >
             ArbitrageEngine
           </Link>
 
-          <nav className="flex items-center gap-6">
+          <nav className="hidden items-center gap-4 lg:flex">
             {navItems.map((item) => {
               const isActive = pathname === item.href;
 
@@ -59,13 +63,13 @@ export function AppHeader() {
           </nav>
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2">
           <button
             type="button"
-            className="flex items-center gap-2 rounded-md bg-red-200 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-red-950"
+            className="flex items-center gap-2 rounded-md bg-red-200 px-3 py-2 text-xs font-semibold uppercase tracking-wide text-red-950"
           >
             <FaShieldAlt size={14} />
-            Emergency Stop
+            <span className="hidden sm:inline">Emergency Stop</span>
           </button>
 
           <button
@@ -75,6 +79,26 @@ export function AppHeader() {
             <FiSettings size={18} />
           </button>
         </div>
+
+        <nav className="flex w-full flex-wrap gap-4 border-t border-zinc-800 pt-3 lg:hidden">
+          {navItems.map((item) => {
+            const isActive = pathname === item.href;
+
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`text-sm transition-colors ${
+                  isActive
+                    ? "text-slate-100"
+                    : "text-slate-400 hover:text-slate-200"
+                }`}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
+        </nav>
       </div>
     </header>
   );
